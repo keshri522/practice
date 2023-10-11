@@ -86,3 +86,41 @@ let wordArray = ["leet", "code"];
 // let s = "catsandog",
 //   wordArray = ["cats", "dog", "sand", "and", "cat"];
 console.log(checkMatchedItems(s, wordArray));
+
+// 3rd question is
+// Given an array of non-negative integers nums, arrange them such that they form the largest
+// number and return it.
+// Note return the result in the form of string
+// Example 1:
+// Input: nums = [10,2]
+// Output: "210"
+// Example 2:
+// Input: nums = [3,30,34,5,9]
+// Output: "9534330"
+
+// const nums = [10, 2];
+const nums = [3, 30, 34, 5, 9];
+// simply copy the original array
+let DummyArry = [...nums];
+// using sort method
+DummyArry.sort((a, b) => {
+  // so here a and b are the numbers so first need to convert this into the intergers for concatination otherwise it will add all the numbers
+  let num1 = a.toString() + b.toString();
+  let num2 = b.toString() + a.toString();
+  //   console.log(num1, num2);
+  // then using sort method functinality to return based on the numbers
+  if (num1 > num2) {
+    return -1;
+  } else if (num1 < num2) {
+    return 1;
+  }
+  // if none of the condtion matches then go for else one
+  else {
+    return 0;
+  }
+});
+
+let getresult = DummyArry.join("");
+// using the template litrals
+let finalOutput = `"${getresult}"`;
+console.log(finalOutput);
