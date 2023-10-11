@@ -1,3 +1,46 @@
+// Write a function that takes an integer 'x'(greater than 0) as input and returns a new integer
+// formed by reversing the digits of 'x' without using any built-in methods for reversal. After
+// reversing the digits, determine whether the resulting number has any prime factors. If it does
+// have prime factors, return 'Yes' along with the list of prime factors; otherwise, return 'No'."
+
+// Example 1:
+// Input - 123
+// reversed integer - 321
+// prime factors of 321 are 3 and 107
+// output - Yes - [3,107]
+// Example 2:
+// Input - 1500
+// reversed Integre - 51
+// prime factors of 51 are 3 and 17
+// output - Yes - [3, 17]
+// Example 3:
+// Input - 1000
+// reversed Integre - 1
+// There are no prime factors for 1
+// output - No
+
+const ReverseThenPrimeFactorChecker = (str) => {
+  // first need to reverse the string
+  let reverse = "";
+  // using for loop
+  for (let x = str.length - 1; x >= 0; x--) {
+    reverse += str[x];
+  }
+  // here need to check the prime factor of the reverse
+  let primeFactor = [];
+  for (let x = 2; x < reverse; x++) {
+    if (reverse % x === 0) {
+      primeFactor.push(x);
+    }
+  }
+  if (primeFactor.length > 0) {
+    return `yes ${primeFactor}`;
+  } else {
+    return "No";
+  }
+};
+console.log(ReverseThenPrimeFactorChecker("1500"));
+
 // first question is
 // Q2) Given an array of strings strs, group the anagrams together. You can return the answer in
 // any order.
