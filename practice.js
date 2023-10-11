@@ -1,0 +1,88 @@
+// first question is
+// Q2) Given an array of strings strs, group the anagrams together. You can return the answer in
+// any order.
+// An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase,
+// typically using all the original letters exactly once.
+
+const AnargramChecker = (strs) => {
+  let size = strs.length;
+  // using hash map dsa
+  let map = new Map();
+
+  // using for loop to iterate the array of strs
+  for (let x = 0; x < size; x++) {
+    let sortedArray = strs[x].split("").sort().join(""); // this will sort each and every index vaalue of the given array
+    // if the sortedArray is already in the map then
+    if (map.has(sortedArray)) {
+      map.get(sortedArray).push(strs[x]);
+    }
+    // if not present in the map then
+    else {
+      map.set(sortedArray, [strs[x]]);
+    }
+  }
+  return map;
+};
+// creating a function this will check the element in the array is anagram or not
+const CheckAnag = (strs, size) => {
+  let map = AnargramChecker(strs, size);
+  // iterate through the hashmap and print the anagram together
+  map.forEach((items) => {
+    console.log(items);
+  });
+};
+let strs = ["eat", "tea", "tan", "ate", "nat", "bat"];
+// let strs = [""];
+// let strs = ["a"];
+CheckAnag(strs);
+// the time complexity is BigO(n) beacuse i am using map and the space complexity is BigO(1);
+
+// for the second question
+
+// Given a string s and a array of strings wordArray, return true if s can be segmented into a
+// space-separated sequence of one or more array words.
+// Note that the same word in the array may be reused multiple times in the segmentation.
+
+// Output: true
+// Explanation: Return true because "leetcode" can be segmented as "leet code".
+
+const checkMatchedItems = (s, wordArray) => {
+  // i need to check if wordArray is not present or length ===0 then return flase
+  if (!wordArray || wordArray.length === 0) {
+    return false;
+  }
+  // otherwise need to check
+  // using hashmap  DataStructure to reduce the tiem complexity
+  const itemsChecked = new Map();
+  wordArray.forEach((item) => {
+    itemsChecked.set(item, true); // adding a flag as a key and its value is true at start
+  });
+
+  // using while loop to keep the track of the s.length
+  while (s.length > 0) {
+    let flag = false;
+    for (let x = 1; x <= s.length; x++) {
+      // need to use substring method to cut letter from the given string
+      const element = s.substring(0, x);
+      // check if the map contains the word or not
+      if (itemsChecked.has(element)) {
+        s = s.substring(x);
+        flag = true;
+        // here we have our element then make the flag to true and break
+        break;
+      }
+    }
+    // check if flag=== ture or vice versa then only return false other wise simply execute the if contions
+    if (!flag) {
+      return false;
+    }
+  }
+  return true;
+};
+let s = "leetcode";
+let wordArray = ["leet", "code"];
+// let s = "applepenapple",
+//   wordArray = ["apple", "pen"];
+// let s = "catsandog",
+//   wordArray = ["cats", "dog", "sand", "and", "cat"];
+console.log(checkMatchedItems(s, wordArray));
