@@ -124,3 +124,32 @@ let getresult = DummyArry.join("");
 // using the template litrals
 let finalOutput = `"${getresult}"`;
 console.log(finalOutput);
+
+// 4th question
+// Given a array of non-negative integers nums, Find the Kth largest element in the array
+// Note - Do not use any sorting algorithm or library's sort method
+// Example-1:
+// Input: nums = [10,4,12,9,87,34], K = 2
+// Output: 34
+
+// i can solve this question using Selection sort this is not inbuild sorting alorithm
+const kthLargestElemet = (arr, position) => {
+  // simple using slection sort
+  let max;
+  for (let x = 0; x < position; x++) {
+    // i need to run this loop because i need to find kth largest element it will check until the postion is less than
+    max = arr[0];
+    for (let y = 0; y < arr.length; y++) {
+      if (arr[y] > max) {
+        max = arr[y]; // this will return the max element in this array
+      }
+    }
+    // now i need to remove this max element in this array to further go to next max element
+    arr = arr.filter((item) => item !== max); // this will modify the array
+  }
+  return max;
+};
+let arr = [10, 4, 12, 9, 87, 34];
+let position = 2;
+console.log(kthLargestElemet(arr, position));
+// the time complexity is BigO(n^2*m)  space complexity is BigO(n) becasue i am removing the max element again and again
